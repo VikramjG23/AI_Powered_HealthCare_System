@@ -5,90 +5,289 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Allopathy Doctor List</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', 'Poppins', sans-serif;
+        }
+        html{
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #f0f2f5;
-            color: #333;
-            padding-bottom: 60px;
+            background: linear-gradient(120deg, #f8fafc 60%, #e0f7fa 100%);
+            color: #222;
+            min-height: 100vh;
+            padding-top: 60px;
         }
 
         header {
-            background-color: #007bff;
+            /* background: linear-gradient(90deg, #007bff 60%, #00c6ff 100%); */
             color: white;
-            padding: 1rem 2rem;
-            display: flex;
+            padding: 1.2rem 2.5rem;
+            /* display: flex;
             justify-content: space-between;
+            align-items: center; */
+            box-shadow: 0 4px 24px rgba(0, 123, 255, 0.10);
+            /* gap: 1.5rem; */
+        }
+
+        .header-logo {
+            display: flex;
             align-items: center;
+            gap: 1rem;
+        }
+        .header-logo img {
+            height: 48px;
+            width: 48px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,123,255,0.08);
+        }
+        .header-logo span {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #fff;
+            font-family: 'Poppins', 'Inter', sans-serif;
+            text-shadow: 0 2px 8px rgba(0,123,255,0.10);
         }
 
-        header h1 {
-            font-size: 1.8rem;
+        .trust-badges {
+            background: rgba(255,255,255,0.92);
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0,123,255,0.07);
+            padding: 1.1rem 1.5rem 1.2rem 1.5rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            align-items: flex-start;
+            border: 1.5px solid #e0e7ef;
+        }
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #e0f7fa;
+            color: #007bff;
+            font-size: 1.01rem;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 4px 14px 4px 10px;
+            box-shadow: 0 1px 4px rgba(0,123,255,0.06);
+        }
+        .trust-badge .badge-icon {
+            font-size: 1.2rem;
         }
 
-        header a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
+        .testimonials-carousel {
+            background: rgba(255,255,255,0.92);
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0,123,255,0.07);
+            padding: 1.1rem 1.5rem 1.2rem 1.5rem;
+            margin-bottom: 1.2rem;
+            border: 1.5px solid #e0e7ef;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            min-height: 120px;
+            position: relative;
+        }
+        .testimonial-text {
+            font-size: 1.08rem;
+            color: #333;
+            font-style: italic;
+            margin-bottom: 0.7rem;
+        }
+        .testimonial-author {
+            font-size: 0.98rem;
+            color: #007bff;
+            font-weight: 600;
+        }
+        .testimonial-nav {
+            position: absolute;
+            right: 1.2rem;
+            bottom: 1.2rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .testimonial-nav button {
+            background: #e0f7fa;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            color: #007bff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .testimonial-nav button:hover {
+            background: #b3e0fc;
         }
 
         .container {
-            max-width: 1500px;
-            margin: auto;
-            padding: 2rem;
+            max-width: 1400px;
+            margin: 2.5rem auto 0 auto;
+            padding: 0 1.2rem 2rem 1.2rem;
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .sidebar {
+            width: 270px;
+            min-width: 200px;
+            max-height: 85vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+            position: sticky;
+            top: 2.5rem;
+            height: fit-content;
+            scrollbar-width: none;
+            scrollbar-color: transparent transparent;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
         }
 
         .filter-container {
-            margin-bottom: 2rem;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 100%;
         }
 
-        .filter-container select {
-            padding: 0.7rem 1rem;
-            border-radius: 8px;
-            border: 1px solid #ccc;
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0,123,255,0.07);
+            border-radius: 16px;
+            padding: 0.7rem 1.5rem;
+            min-width: 0;
+            margin: 0;
+        }
+        .filter-bar label {
+            font-weight: 600;
+            color: #007bff;
+            margin-right: 0.5rem;
+        }
+        .filter-bar select {
+            padding: 0.6rem 1.2rem 0.6rem 2.2rem;
+            border-radius: 10px;
+            border: 1.5px solid #e0e7ef;
             font-size: 1rem;
+            font-family: inherit;
+            background: #f8fafd url('data:image/svg+xml;utf8,<svg fill="%23007bff" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat 8px center/18px 18px;
+            color: #007bff;
+            font-weight: 500;
+            transition: border 0.2s;
+        }
+        .filter-bar select:focus {
+            border: 1.5px solid #007bff;
+            outline: none;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0,123,255,0.07);
+            border-radius: 16px;
+            padding: 0.6rem 1.2rem;
+            min-width: 0;
+            margin: 0;
+            gap: 0.7rem;
+        }
+        .search-bar input {
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            background: transparent;
+            width: 100%;
+            color: #222;
+            font-family: inherit;
+        }
+        .search-bar .search-icon {
+            color: #007bff;
+            font-size: 1.3rem;
+        }
+        .quick-stats {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin-top: 0;
+            margin-bottom: 0;
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            background: linear-gradient(90deg, #e0f7fa 60%, #f0f2f5 100%);
+            color: #007bff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,123,255,0.07);
+            padding: 0.7rem 1.5rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .stat-card .stat-icon {
+            font-size: 1.2rem;
+            margin-right: 0.3rem;
         }
 
         .doctor-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
             transition: all 0.3s ease-in-out;
         }
 
         .doctor-card {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 123, 255, 0.08), 0 2px 8px rgba(0,0,0,0.04);
+            padding: 1.7rem 1.5rem 1.5rem 1.5rem;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, flex 0.3s ease, width 0.3s ease;
-            /* flex: 1 1 calc(33.333% - 1rem); */
+            transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s, border 0.3s, background 0.3s;
             min-width: 362px;
+            position: relative;
+            border: 2px solid transparent;
         }
 
         .doctor-card.active {
-            flex: 1 1 100%;
-            order: -1;
+            background: linear-gradient(105deg, #e0f7fa 60%, #f0f2f5 100%);
+            box-shadow: 0 8px 24px rgba(0, 123, 255, 0.12);
+            border: 2px solid #007bff;
+            transform: scale(1.025);
         }
 
         .doctor-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-7px) scale(1.03);
+            box-shadow: 0 12px 32px rgba(0, 123, 255, 0.13), 0 2px 8px rgba(0,0,0,0.06);
+            border: 2px solid #00c6ff;
         }
 
         .doctor-card h3 {
             margin-bottom: 0.5rem;
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             color: #007bff;
+            font-weight: 700;
         }
 
         .doctor-card p {
@@ -97,40 +296,117 @@
             color: #555;
         }
 
-        .doctor-details {
-            display: none;
-            margin-top: 1rem;
-            border-top: 1px solid #eee;
-            padding-top: 1rem;
-            animation: slideDown 0.3s ease forwards;
+        .badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #ffb347 60%, #ffcc80 100%);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 3px 12px;
+            border-radius: 8px;
+            margin-left: 0.5rem;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(255,179,71,0.08);
+            position: relative;
+        }
+        .tooltip {
+            position: relative;
+            cursor: pointer;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: max-content;
+            background: #222;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 6px 12px;
+            position: absolute;
+            z-index: 10;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 0.95rem;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .tooltip:hover .tooltiptext, .tooltip:focus .tooltiptext {
+            visibility: visible;
+            opacity: 1;
         }
 
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                max-height: 0;
-            }
+        .doctor-card .chevron {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+            color: #007bff;
+            font-size: 1.3rem;
+            pointer-events: none;
+        }
+        .doctor-card.active .chevron {
+            transform: rotate(90deg);
+        }
 
-            to {
-                opacity: 1;
-                max-height: 500px;
-            }
+        .doctor-details {
+            display: grid;
+            grid-template-rows: 0fr;
+            overflow: hidden;
+            margin-top: 1rem;
+            border-top: 1px solid #eee;
+            padding-top: 0;
+            transition: grid-template-rows 0.4s cubic-bezier(.4,2,.6,1), padding-top 0.3s;
+            background: transparent;
+        }
+        .doctor-card.active .doctor-details {
+            grid-template-rows: 1fr;
+            padding-top: 1rem;
+            background: #f8fbff;
+        }
+        .doctor-details-content {
+            min-height: 0;
+        }
+        .hide-details-btn {
+            margin-top: 1rem;
+            padding: 0.5rem 1.2rem;
+            background: #fff;
+            color: #007bff;
+            border: 1px solid #007bff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.98rem;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+        }
+        .hide-details-btn:hover {
+            background: #007bff;
+            color: #fff;
         }
 
         .book-button {
             margin-top: 1rem;
             padding: 0.6rem 1.5rem;
-            background-color: #28a745;
-            color: white;
+            background: linear-gradient(90deg, #28a745 60%, #43e97b 100%);
+            color: #fff;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
-            transition: background-color 0.3s;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(40,167,69,0.08);
+            transition: background 0.2s, box-shadow 0.2s;
         }
-
         .book-button:hover {
-            background-color: #218838;
+            background: linear-gradient(90deg, #218838 60%, #43e97b 100%);
+            box-shadow: 0 4px 16px rgba(40,167,69,0.13);
         }
 
         .no-doctors {
@@ -141,13 +417,542 @@
         }
 
         footer {
-            background-color: #007bff;
-            color: white;
-            padding: 1rem;
+            background: linear-gradient(90deg, #007bff 60%, #00c6ff 100%);
+            color: #fff;
+            padding: 2.5rem 0 0.7rem 0;
+            font-size: 1.08rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 -2px 16px rgba(0, 123, 255, 0.08);
+            margin-top: 2.5rem;
+        }
+        .content-f {
+            display: flex;
+            justify-content: space-between;
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        .box-f {
+            flex: 1 1 260px;
+            min-width: 220px;
+            margin-bottom: 1.5rem;
+        }
+        .topic {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.7rem;
+            color: #ffe082;
+            letter-spacing: 1px;
+        }
+        .left.box-f p {
+            margin-bottom: 1.2rem;
+            color: #f8fafd;
+        }
+        .lower .topic {
+            margin-bottom: 0.3rem;
+            color: #ffe082;
+        }
+        .phone a, .email a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+        .middle.box-f a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .middle.box-f a:hover {
+            color: #ffe082;
+            text-decoration: underline;
+        }
+        .right.box-f input[type="text"] {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: none;
+            margin-bottom: 0.7rem;
+            width: 80%;
+            font-size: 1rem;
+        }
+        .right.box-f input[type="submit"] {
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            border: none;
+            background: #ffe082;
+            color: #007bff;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .right.box-f input[type="submit"]:hover {
+            background: #fff;
+            color: #007bff;
+        }
+        .media-icons {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+        .media-icons a img {
+            width: 28px;
+            height: 28px;
+            filter: brightness(0) invert(1);
+            transition: filter 0.2s, transform 0.2s;
+        }
+        .media-icons a:hover img {
+            filter: brightness(1) invert(0.2) sepia(1) hue-rotate(40deg) saturate(4);
+            transform: scale(1.15) rotate(-7deg);
+        }
+        .bottom-f {
             text-align: center;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            color: #fff;
+        }
+        .bottom-f a {
+            color: #ffe082;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .bottom-f a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 900px) {
+            .content-f {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 0 1.2rem;
+            }
+            .box-f {
+                min-width: 0;
+            }
+        }
+
+        /* --- Premium Navbar Styles --- */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.7rem 2rem;
+            background: linear-gradient(90deg, #007bff 60%, #00c6ff 100%);
+            box-shadow: 0 6px 24px rgba(0, 123, 255, 0.13);
             position: fixed;
-            bottom: 0;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            z-index: 100;
+            border-radius: 0 0 18px 18px;
+        }
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .header-logo span {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #fff;
+            font-family: 'Poppins', 'Inter', sans-serif;
+            text-shadow: 0 2px 8px rgba(0,123,255,0.10);
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .navbar-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar-links li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.15rem;
+            letter-spacing: 1px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+            font-family: 'Poppins', 'Inter', sans-serif;
+            box-shadow: 0 1px 4px rgba(0,123,255,0.04);
+        }
+        .navbar-links li a:hover, .navbar-links li a:focus {
+            background: rgba(255,255,255,0.18);
+            color: #ffe082;
+            box-shadow: 0 2px 8px rgba(0,123,255,0.10);
+            text-decoration: underline;
+        }
+        .navbar-links li a.active {
+            background: rgba(255,255,255,0.25);
+            color: #ffe082;
+            text-decoration: underline;
+        }
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2.2rem;
+            cursor: pointer;
+            padding: 0 8px;
+        }
+        @media (max-width: 900px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 0.5rem 0.7rem;
+                border-radius: 0 0 12px 12px;
+            }
+            .navbar-right {
+                gap: 0.5rem;
+            }
+            .navbar-links {
+                display: none;
+                flex-direction: column;
+                gap: 1.2rem;
+                background: #fff;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 60vw;
+                min-width: 180px;
+                box-shadow: 0 8px 32px rgba(0,123,255,0.13);
+                padding: 1.2rem 0;
+                z-index: 200;
+                border-radius: 0 0 0 16px;
+            }
+            .navbar-links.open {
+                display: flex;
+            }
+            .navbar-links li a {
+                color: #007bff;
+                font-size: 1.1rem;
+                border-bottom: none;
+                background: none;
+                box-shadow: none;
+            }
+            .navbar-links li a:hover, .navbar-links li a:focus {
+                background: #e0f7fa;
+                color: #007bff;
+                text-decoration: underline;
+            }
+            .navbar-toggle {
+                display: block;
+                margin-left: 0.5rem;
+            }
+        }
+        /* --- End Navbar Styles --- */
+
+        .sort-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0,123,255,0.07);
+            border-radius: 16px;
+            padding: 0.7rem 1.5rem;
+            min-width: 0;
+            margin: 0;
+            border: 1.5px solid #e0e7ef;
+        }
+        .sort-bar label {
+            font-weight: 600;
+            color: #007bff;
+            margin-right: 0.5rem;
+            font-size: 1rem;
+        }
+        .sort-bar select {
+            padding: 0.6rem 1.2rem 0.6rem 2.2rem;
+            border-radius: 10px;
+            border: 1.5px solid #e0e7ef;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #f8fafd url('data:image/svg+xml;utf8,<svg fill="%23007bff" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat 8px center/18px 18px;
+            color: #007bff;
+            font-weight: 500;
+            transition: border 0.2s;
+        }
+        .sort-bar select:focus {
+            border: 1.5px solid #007bff;
+            outline: none;
+        }
+        @media (max-width: 900px) {
+            .sort-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.7rem;
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        /* --- Advanced Filters Styles --- */
+        .advanced-filters {
+            background: rgba(255,255,255,0.85);
+            box-shadow: 0 6px 24px rgba(0,123,255,0.10), 0 1.5px 6px rgba(0,0,0,0.04);
+            border-radius: 18px;
+            padding: 1.3rem 1.7rem 1.3rem 1.7rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.3rem;
+            border: 1.5px solid #e0e7ef;
+            backdrop-filter: blur(2px);
+        }
+        .advanced-filters label {
+            font-weight: 600;
+            color: #007bff;
+            margin-bottom: 0.2rem;
+            font-size: 1.05rem;
+        }
+        .advanced-filters select {
             width: 100%;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            border: 1.5px solid #e0e7ef;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #f8fafd;
+            color: #007bff;
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+        .advanced-filters select:focus {
+            border: 1.5px solid #007bff;
+            box-shadow: 0 0 0 2px #e0f0ff;
+            outline: none;
+        }
+        .advanced-filters input[type='range'] {
+            width: 100%;
+            margin: 0.5rem 0 0.2rem 0;
+            -webkit-appearance: none;
+            background: transparent;
+            height: 2.5px;
+        }
+        .advanced-filters input[type='range']:focus {
+            outline: none;
+        }
+        .advanced-filters input[type='range']::-webkit-slider-runnable-track {
+            height: 6px;
+            background: linear-gradient(90deg, #e0f7fa 60%, #f0f2f5 100%);
+            border-radius: 6px;
+        }
+        .advanced-filters input[type='range']::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #007bff 60%, #00c6ff 100%);
+            box-shadow: 0 2px 8px rgba(0,123,255,0.13);
+            border: 2.5px solid #fff;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .advanced-filters input[type='range']:focus::-webkit-slider-thumb {
+            background: linear-gradient(135deg, #0056b3 60%, #00c6ff 100%);
+        }
+        .advanced-filters input[type='range']::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #007bff 60%, #00c6ff 100%);
+            box-shadow: 0 2px 8px rgba(0,123,255,0.13);
+            border: 2.5px solid #fff;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .advanced-filters input[type='range']:focus::-moz-range-thumb {
+            background: linear-gradient(135deg, #0056b3 60%, #00c6ff 100%);
+        }
+        .advanced-filters input[type='range']::-ms-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #007bff 60%, #00c6ff 100%);
+            box-shadow: 0 2px 8px rgba(0,123,255,0.13);
+            border: 2.5px solid #fff;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .advanced-filters input[type='range']:focus::-ms-thumb {
+            background: linear-gradient(135deg, #0056b3 60%, #00c6ff 100%);
+        }
+        .advanced-filters input[type='range']::-ms-fill-lower {
+            background: #e0f7fa;
+        }
+        .advanced-filters input[type='range']::-ms-fill-upper {
+            background: #f0f2f5;
+        }
+        .advanced-filters input[type='range']:focus::-ms-fill-lower {
+            background: #e0f7fa;
+        }
+        .advanced-filters input[type='range']:focus::-ms-fill-upper {
+            background: #f0f2f5;
+        }
+        .advanced-filters input[type='range']::-moz-range-track {
+            height: 6px;
+            background: linear-gradient(90deg, #e0f7fa 60%, #f0f2f5 100%);
+            border-radius: 6px;
+        }
+        .advanced-filters input[type='range']:focus::-webkit-slider-runnable-track {
+            background: linear-gradient(90deg, #b3e0fc 60%, #e0f2ff 100%);
+        }
+        .advanced-filters input[type='range']:focus::-moz-range-track {
+            background: linear-gradient(90deg, #b3e0fc 60%, #e0f2ff 100%);
+        }
+        .advanced-filters input[type='range']:focus::-ms-fill-lower {
+            background: #b3e0fc;
+        }
+        .advanced-filters input[type='range']:focus::-ms-fill-upper {
+            background: #e0f2ff;
+        }
+        .advanced-filters input[type='range']:focus {
+            outline: none;
+        }
+        .advanced-filters input[type='range']::-webkit-slider-thumb {
+            box-shadow: 0 2px 8px rgba(0,123,255,0.18);
+        }
+        .advanced-filters input[type='range']:active::-webkit-slider-thumb {
+            background: linear-gradient(135deg, #0056b3 60%, #00c6ff 100%);
+        }
+        .advanced-filters input[type='range']:active::-moz-range-thumb {
+            background: linear-gradient(135deg, #0056b3 60%, #00c6ff 100%);
+        }
+        .advanced-filters input[type='range']:active::-ms-thumb {
+            background: linear-gradient(135deg, #0056b3 60%, #00c6ff 100%);
+        }
+        .advanced-filters .filter-value {
+            color: #007bff;
+            font-size: 0.98rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            background: #e0f7fa;
+            border-radius: 6px;
+            padding: 2px 10px;
+            margin-top: 0.2rem;
+            display: inline-block;
+        }
+
+        /* --- Mini Message Box (Ask a Question) Styles --- */
+        .ask-btn {
+            position: fixed;
+            bottom: 2.2rem;
+            right: 2.2rem;
+            z-index: 1200;
+            background: linear-gradient(135deg, #007bff 60%, #00c6ff 100%);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            box-shadow: 0 4px 16px rgba(0,123,255,0.18);
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .ask-btn:hover {
+            background: linear-gradient(135deg, #0056b3 60%, #00c6ff 100%);
+            box-shadow: 0 8px 32px rgba(0,123,255,0.23);
+        }
+        .ask-modal-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.18);
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ask-modal {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0,123,255,0.13);
+            padding: 2.2rem 2.5rem 2rem 2.5rem;
+            min-width: 350px;
+            max-width: 95vw;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            position: relative;
+        }
+        .ask-modal-close {
+            position: absolute;
+            top: 1.1rem;
+            right: 1.3rem;
+            font-size: 1.7rem;
+            color: #007bff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+        }
+        .ask-modal label {
+            font-weight: 600;
+            color: #007bff;
+            margin-bottom: 0.2rem;
+        }
+        .ask-modal input, .ask-modal textarea {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            border: 1.5px solid #e0e7ef;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #f8fafd;
+            color: #222;
+            margin-bottom: 0.7rem;
+        }
+        .ask-modal textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .ask-modal button[type='submit'] {
+            background: linear-gradient(90deg, #28a745 60%, #43e97b 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .ask-modal button[type='submit']:hover {
+            background: linear-gradient(90deg, #218838 60%, #43e97b 100%);
+        }
+        .ask-confirm {
+            background: #d4edda;
+            color: #155724;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.2rem;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        @media (max-width: 600px) {
+            .ask-modal {
+                min-width: 0;
+                padding: 1.2rem 0.7rem 1rem 0.7rem;
+            }
+            .ask-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 1.3rem;
+                bottom: 1.1rem;
+                right: 1.1rem;
+            }
         }
     </style>
 </head>
@@ -155,32 +960,136 @@
 <body>
 
     <header>
-        <h1>Allopathy Doctors</h1>
-        <a href="../index.html">Home</a>
+        <nav class="navbar">
+            <div class="header-logo">
+                <img src="../img/medlogo.png" alt="Logo" />
+                <span>HelloTakeCare</span>
+            </div>
+            <div class="navbar-right">
+                <ul class="navbar-links" id="navbarLinks">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation">&#9776;</button>
+            </div>
+        </nav>
     </header>
 
     <div class="container">
 
-        <div class="filter-container">
-            <label for="departmentFilter"><strong>Filter by Department:</strong></label>
-            <select id="departmentFilter">
-                <option value="all">All</option>
-                <option value="Cardiology">Cardiology</option>
-                <option value="Dermatology">Dermatology</option>
-                <option value="Pediatrics">Pediatrics</option>
-                <option value="Orthopedics">Orthopedics</option>
-                <option value="General">General</option>
-            </select>
+        <div class="sidebar">
+            <div class="filter-container">
+                <div class="search-bar">
+                    <span class="search-icon">&#128269;</span>
+                    <input type="text" id="doctorSearch" placeholder="Search doctor, hospital, or specialty..." />
+                </div>
+                <div class="advanced-filters">
+                    <div>
+                        <label for="minRating">Min. Rating</label>
+                        <input type="range" id="minRating" min="0" max="5" step="0.1" value="0" />
+                        <span class="filter-value" id="minRatingValue">0</span>
+                    </div>
+                    <div>
+                        <label for="minExperience">Min. Experience (years)</label>
+                        <select id="minExperience">
+                            <option value="0">Any</option>
+                            <option value="5">5+</option>
+                            <option value="10">10+</option>
+                            <option value="15">15+</option>
+                            <option value="20">20+</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="trust-badges">
+                <div class="trust-badge"><span class="badge-icon">&#128274;</span> HIPAA Compliant</div>
+                <div class="trust-badge"><span class="badge-icon">&#128100;</span> Trusted by 10,000+ Patients</div>
+                <div class="trust-badge"><span class="badge-icon">&#9989;</span> Verified Doctors</div>
+                <div class="trust-badge"><span class="badge-icon">&#127942;</span> Awarded Best Health Startup 2024</div>
+            </div>
+            <div class="testimonials-carousel" id="testimonialsCarousel">
+                <div class="testimonial-text" id="testimonialText"></div>
+                <div class="testimonial-author" id="testimonialAuthor"></div>
+                <div class="testimonial-nav">
+                    <button id="testimonialPrev" title="Previous">&#8592;</button>
+                    <button id="testimonialNext" title="Next">&#8594;</button>
+                </div>
+            </div>
         </div>
 
+        <div class="main-content">
+            <div class="filters-row" style="display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.2rem; flex-wrap: wrap;">
+                <div class="filter-bar" style="margin-bottom: 0;">
+                    <label for="departmentFilter">Department</label>
+                    <select id="departmentFilter">
+                        <option value="all">All</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Dermatology">Dermatology</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="General">General</option>
+                    </select>
+                </div>
+                <div class="sort-bar" style="margin-bottom: 0;">
+                    <label for="sortDoctors">Sort by</label>
+                    <select id="sortDoctors">
+                        <option value="default">Default</option>
+                        <option value="rating">Rating (High to Low)</option>
+                        <option value="experience">Experience (High to Low)</option>
+                        <option value="name">Name (A-Z)</option>
+                        <option value="fee">Fee (Low to High)</option>
+                    </select>
+                </div>
+            </div>
         <div class="doctor-list" id="doctorList"></div>
-
         <div class="no-doctors" id="noDoctors" style="display: none;">No doctors found in this department.</div>
+        </div>
 
     </div>
 
-    <footer>
-        &copy; 2025 HelloTakeCare. All Rights Reserved.
+    <footer id="footer">
+      <div class="content-f">
+        <div class="left box-f">
+          <div class="upper">
+            <div class="topic" id="about">About us</div>
+            <p>HelloTakeCare is dedicated to connecting you with top allopathy doctors and providing trusted healthcare information and services.</p>
+          </div>
+          <div class="lower">
+            <div class="topic" id="contact">Contact us</div>
+            <div class="phone">
+              <a href="#"><i class="fas fa-phone-volume"></i>+91 9748196100</a>
+            </div>
+            <div class="email">
+              <a href="#"><i class="fas fa-envelope"></i>support@hellotakecare.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="middle box-f">
+          <div class="topic">Quick Links</div>
+          <div><a href="../index.html">Home</a></div>
+          <div><a href="#">Allopathy Doctors</a></div>
+          <div><a href="#about">About Us</a></div>
+          <div><a href="#contact">Contact</a></div>
+        </div>
+        <div class="right box-f">
+          <div class="topic">Subscribe us</div>
+          <form action="#">
+            <input type="text" placeholder="Enter email address">
+            <input type="submit" value="Send">
+            <div class="media-icons">
+              <a href="#"><img src="../img/icons8-facebook.svg"></a>
+              <a href="#"><img src="../img/icons8-twitter.svg"></a>
+              <a href="#"><img src="../img/icons8-instagram.svg"></a>
+              <a href="#"><img src="../img/icons8-github.svg"></a>
+              <a href="#"><img src="../img/icons8-linkedin-circled.svg"></a>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="bottom-f mt-4">
+        <p>Copyright © 2025 <a href="../index.html">HelloTakeCare</a> All rights reserved</p>
+      </div>
     </footer>
 
     <script>
@@ -195,7 +1104,9 @@
                 image: "https://i.imgur.com/Zz4rzZR.jpg",
                 fees: "₹800",
                 availability: "Mon - Fri: 10AM - 2PM",
-                hospital: "City Heart Hospital"
+                hospital: "City Heart Hospital",
+                rating: 4.8,
+                experience: 18
             },
             {
                 name: "Dr. Sunita Sharma",
@@ -207,7 +1118,9 @@
                 image: "https://i.imgur.com/jxWqIBf.jpg",
                 fees: "₹600",
                 availability: "Tue - Sat: 11AM - 3PM",
-                hospital: "SkinCare Center"
+                hospital: "SkinCare Center",
+                rating: 4.7,
+                experience: 12
             },
             {
                 name: "Dr. Anil Gupta",
@@ -219,7 +1132,9 @@
                 image: "../img/Passport_Photograph.jpg",
                 fees: "₹500",
                 availability: "Mon - Fri: 9AM - 1PM",
-                hospital: "Happy Kids Hospital"
+                hospital: "Happy Kids Hospital",
+                rating: 4.5,
+                experience: 15
             },
             {
                 name: "Dr. Priya Mehta",
@@ -231,7 +1146,9 @@
                 image: "https://i.imgur.com/YkZHQYJ.jpg",
                 fees: "₹750",
                 availability: "Mon - Sat: 10AM - 1PM",
-                hospital: "Ortho Plus Hospital"
+                hospital: "Ortho Plus Hospital",
+                rating: 4.6,
+                experience: 10
             },
             {
                 name: "Dr. Manoj Verma",
@@ -243,17 +1160,213 @@
                 image: "https://i.imgur.com/vMBc9yo.jpg",
                 fees: "₹400",
                 availability: "All Days: 8AM - 11AM",
-                hospital: "Family Care Clinic"
+                hospital: "Family Care Clinic",
+                rating: 4.3,
+                experience: 8
+            },
+            {
+                name: "Dr. Neha Singh",
+                degree: "MBBS, MD (Pediatrics)",
+                department: "Pediatrics",
+                description: "Expert in child nutrition and immunization.",
+                clinic: "Sunshine Hospital, Bhopal",
+                tags: ["Immunization", "Child Growth", "Nutrition"],
+                image: "https://randomuser.me/api/portraits/women/44.jpg",
+                fees: "₹550",
+                availability: "Mon - Fri: 10AM - 1PM",
+                hospital: "Sunshine Hospital",
+                rating: 4.4,
+                experience: 9
+            },
+            {
+                name: "Dr. Rajesh Patel",
+                degree: "MBBS, MS (Ortho)",
+                department: "Orthopedics",
+                description: "Specialist in sports injuries and joint replacement.",
+                clinic: "OrthoCare, Ahmedabad",
+                tags: ["Sports Injury", "Arthroscopy", "Joint Replacement"],
+                image: "https://randomuser.me/api/portraits/men/32.jpg",
+                fees: "₹900",
+                availability: "Tue - Sat: 12PM - 4PM",
+                hospital: "OrthoCare Hospital",
+                rating: 4.2,
+                experience: 7
+            },
+            {
+                name: "Dr. Meera Joshi",
+                degree: "MBBS, MD (Dermatology)",
+                department: "Dermatology",
+                description: "Expert in cosmetic dermatology and laser treatments.",
+                clinic: "Glow Skin Clinic, Indore",
+                tags: ["Laser Treatment", "Cosmetic Dermatology", "Psoriasis"],
+                image: "https://randomuser.me/api/portraits/women/65.jpg",
+                fees: "₹700",
+                availability: "Mon, Wed, Fri: 2PM - 6PM",
+                hospital: "Glow Skin Clinic",
+                rating: 4.9,
+                experience: 14
+            },
+            {
+                name: "Dr. Suresh Nair",
+                degree: "MBBS, DM (Cardiology)",
+                department: "Cardiology",
+                description: "Interventional cardiologist with 20+ years of experience.",
+                clinic: "Heart Care Center, Kochi",
+                tags: ["Angioplasty", "Heart Failure", "Arrhythmia"],
+                image: "https://randomuser.me/api/portraits/men/45.jpg",
+                fees: "₹1200",
+                availability: "Mon - Thu: 9AM - 12PM",
+                hospital: "Heart Care Center",
+                rating: 5.0,
+                experience: 22
+            },
+            {
+                name: "Dr. Kavita Rao",
+                degree: "MBBS, MD (General Medicine)",
+                department: "General",
+                description: "Diabetes and hypertension management specialist.",
+                clinic: "City Clinic, Hyderabad",
+                tags: ["Diabetes", "Hypertension", "General Health"],
+                image: "https://randomuser.me/api/portraits/women/50.jpg",
+                fees: "₹650",
+                availability: "Mon - Sat: 8AM - 12PM",
+                hospital: "City Clinic",
+                rating: 4.1,
+                experience: 6
+            },
+            {
+                name: "Dr. Amitabh Roy",
+                degree: "MBBS, MD (Cardiology)",
+                department: "Cardiology",
+                description: "Specialist in preventive cardiology and lifestyle diseases.",
+                clinic: "Roy Heart Clinic, Kolkata",
+                tags: ["Preventive Cardiology", "Cholesterol", "Lifestyle Diseases"],
+                image: "https://randomuser.me/api/portraits/men/60.jpg",
+                fees: "₹850",
+                availability: "Mon, Wed, Fri: 11AM - 2PM",
+                hospital: "Roy Heart Clinic",
+                rating: 4.6,
+                experience: 13
+            },
+            {
+                name: "Dr. Shalini Desai",
+                degree: "MBBS, DDVL",
+                department: "Dermatology",
+                description: "Acne and pigmentation treatment expert.",
+                clinic: "DermaPlus, Surat",
+                tags: ["Acne", "Pigmentation", "Skin Allergy"],
+                image: "https://randomuser.me/api/portraits/women/33.jpg",
+                fees: "₹500",
+                availability: "Tue, Thu, Sat: 10AM - 1PM",
+                hospital: "DermaPlus Clinic",
+                rating: 4.3,
+                experience: 8
+            },
+            {
+                name: "Dr. Vikram Shetty",
+                degree: "MBBS, MS (Ortho)",
+                department: "Orthopedics",
+                description: "Expert in spine surgery and trauma care.",
+                clinic: "Spine & Ortho Center, Bengaluru",
+                tags: ["Spine Surgery", "Trauma Care", "Joint Pain"],
+                image: "https://randomuser.me/api/portraits/men/70.jpg",
+                fees: "₹1000",
+                availability: "Mon - Fri: 3PM - 7PM",
+                hospital: "Spine & Ortho Center",
+                rating: 4.0,
+                experience: 5
+            },
+            {
+                name: "Dr. Ritu Malhotra",
+                degree: "MBBS, MD (Pediatrics)",
+                department: "Pediatrics",
+                description: "Specialist in adolescent health and child psychology.",
+                clinic: "Kids Health Clinic, Chandigarh",
+                tags: ["Adolescent Health", "Child Psychology", "Immunization"],
+                image: "https://randomuser.me/api/portraits/women/22.jpg",
+                fees: "₹600",
+                availability: "Mon - Sat: 9AM - 12PM",
+                hospital: "Kids Health Clinic",
+                rating: 4.2,
+                experience: 7
+            },
+            {
+                name: "Dr. Arvind Menon",
+                degree: "MBBS, MD (General Medicine)",
+                department: "General",
+                description: "General physician with focus on preventive healthcare.",
+                clinic: "Menon Clinic, Chennai",
+                tags: ["Preventive Care", "Fever", "General Health"],
+                image: "https://randomuser.me/api/portraits/men/80.jpg",
+                fees: "₹500",
+                availability: "Mon - Fri: 8AM - 11AM",
+                hospital: "Menon Clinic",
+                rating: 4.1,
+                experience: 6
             }
         ];
 
         const doctorListContainer = document.getElementById('doctorList');
         const departmentFilter = document.getElementById('departmentFilter');
         const noDoctors = document.getElementById('noDoctors');
+        const doctorSearch = document.getElementById('doctorSearch');
+        const minRating = document.getElementById('minRating');
+        const minRatingValue = document.getElementById('minRatingValue');
+        const minExperience = document.getElementById('minExperience');
+        const sortDoctors = document.getElementById('sortDoctors');
 
-        function displayDoctors(department) {
+        function displayDoctors(department, searchTerm = '', minRatingVal = 0, minExpVal = 0, sortBy = 'default') {
+            // Show skeletons
             doctorListContainer.innerHTML = '';
-            const filteredDoctors = department === 'all' ? doctors : doctors.filter(doc => doc.department === department);
+            for (let i = 0; i < 3; i++) {
+                doctorListContainer.innerHTML += `
+                  <div class="skeleton-card">
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                      <div class="skeleton-img"></div>
+                      <div style="flex:1;">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                        <div class="skeleton-line tiny"></div>
+                        <div class="skeleton-badge"></div>
+                      </div>
+                    </div>
+                    <div class="skeleton-line"></div>
+                    <div class="skeleton-line short"></div>
+                  </div>
+                `;
+            }
+            setTimeout(() => {
+                _displayDoctors(department, searchTerm, minRatingVal, minExpVal, sortBy);
+            }, 700);
+        }
+
+        function _displayDoctors(department, searchTerm = '', minRatingVal = 0, minExpVal = 0, sortBy = 'default') {
+            doctorListContainer.innerHTML = '';
+            let filteredDoctors = department === 'all' ? doctors : doctors.filter(doc => doc.department === department);
+            if (searchTerm.trim() !== '') {
+                const term = searchTerm.trim().toLowerCase();
+                filteredDoctors = filteredDoctors.filter(doc =>
+                    doc.name.toLowerCase().includes(term) ||
+                    doc.hospital.toLowerCase().includes(term) ||
+                    doc.department.toLowerCase().includes(term) ||
+                    (doc.tags && doc.tags.some(tag => tag.toLowerCase().includes(term)))
+                );
+            }
+            filteredDoctors = filteredDoctors.filter(doc => doc.rating >= minRatingVal && doc.experience >= minExpVal);
+            // Sorting
+            if (sortBy === 'rating') {
+                filteredDoctors.sort((a, b) => b.rating - a.rating);
+            } else if (sortBy === 'experience') {
+                filteredDoctors.sort((a, b) => b.experience - a.experience);
+            } else if (sortBy === 'name') {
+                filteredDoctors.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (sortBy === 'fee') {
+                filteredDoctors.sort((a, b) => {
+                    const feeA = parseInt(a.fees.replace(/[^0-9]/g, ''));
+                    const feeB = parseInt(b.fees.replace(/[^0-9]/g, ''));
+                    return feeA - feeB;
+                });
+            }
 
             if (filteredDoctors.length === 0) {
                 noDoctors.style.display = 'block';
@@ -267,41 +1380,55 @@
                 card.className = 'doctor-card';
                 card.setAttribute('data-index', index);
 
+                // Compare checkbox
+                const compareId = `compare-${index}`;
+                card.innerHTML += `<label class="compare-checkbox" title="Select to compare"><input type="checkbox" id="${compareId}" class="compare-input" /> Compare</label>`;
+
                 card.innerHTML = `
   <div style="display: flex; gap: 1rem; align-items: center;">
-    <img src="${doctor.image}" alt="${doctor.name}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;" />
-    <div>
-      <h3>${doctor.name}</h3>
+    <img src="${doctor.image}" alt="${doctor.name}" style="width: 80px; height: 120px; border-radius: 12px; object-fit: cover;" />
+    <div style="flex:1;">
+      <h3>${doctor.name}
+        ${(doctor.name === "Dr. Ravi Kumar" || doctor.name === "Dr. Sunita Sharma" || doctor.name === "Dr. Suresh Nair" || doctor.name === "Dr. Meera Joshi") ? '<span class="badge tooltip">Top Rated<span class="tooltiptext">This doctor is highly rated by patients</span></span>' : ''}
+      </h3>
       <p>${doctor.degree}</p>
       <p><strong>Department:</strong> ${doctor.department}</p>
       <p><strong>Hospital:</strong> ${doctor.hospital}</p>
-      <p><strong>Fees:</strong> ${doctor.fees}</p>
+      <div style="display: flex; align-items: center; gap: 1.1rem; margin: 0.3rem 0 0.2rem 0;">
+        <span class="tooltip" tabindex="0" style="color: #ffb400; font-size: 1.1rem; font-weight: 600;">
+          ${'★'.repeat(Math.floor(doctor.rating))}${doctor.rating % 1 >= 0.5 ? '½' : ''}<span style="color:#bbb;">${'★'.repeat(5 - Math.ceil(doctor.rating))}</span>
+          <span class="tooltiptext">${doctor.rating} out of 5 stars</span>
+        </span>
+        <span style="color: #007bff; font-size: 0.98rem; font-weight: 500;">${doctor.rating.toFixed(1)}</span>
+        <span class="tooltip" tabindex="0" style="color: #555; font-size: 0.98rem;">
+          ${doctor.experience} yrs exp.
+          <span class="tooltiptext">Years of experience</span>
+        </span>
+      </div>
       <p><strong>Availability:</strong> ${doctor.availability}</p>
     </div>
-  </div>
-  <div style="margin-top: 0.5rem;">
-    ${doctor.tags.map(tag => `<span style="display: inline-block; background-color: #e0f0ff; color: #007bff; padding: 4px 8px; border-radius: 6px; margin-right: 5px; font-size: 0.8rem;">${tag}</span>`).join('')}
+    <span class="chevron">&#9654;</span>
   </div>
   <div class="doctor-details" id="details-${index}">
+    <div class="doctor-details-content">
     <p><strong>Description:</strong> ${doctor.description}</p>
     <p><strong>Clinic Address:</strong> ${doctor.clinic}</p>
-    <button class="book-button" onclick="window.location.href='appointment.html'">Book Appointment</button>
+      <p><strong>Rating:</strong> <span class="tooltip" tabindex="0" style="color: #ffb400; font-size: 1.1rem; font-weight: 600;">
+          ${'★'.repeat(Math.floor(doctor.rating))}${doctor.rating % 1 >= 0.5 ? '½' : ''}<span style="color:#bbb;">${'★'.repeat(5 - Math.ceil(doctor.rating))}</span>
+          <span class="tooltiptext">${doctor.rating} out of 5 stars</span>
+        </span> <span style="color: #007bff; font-size: 0.98rem; font-weight: 500;">${doctor.rating.toFixed(1)}</span>
+      </p>
+      <p><strong>Experience:</strong> <span class="tooltip" tabindex="0" style="color: #007bff; font-weight: 500;">${doctor.experience} years<span class="tooltiptext">Years of experience</span></span></p>
+      <button class="book-button" onclick="bookAppointment(${index}); event.stopPropagation();">Book Appointment</button>
+      <button class="hide-details-btn" onclick="hideDetails(event, ${index})">Hide Details</button>
+    </div>
   </div>
 `;
-
 
                 card.addEventListener('click', (e) => {
                     if (e.target.tagName.toLowerCase() === 'button') return; // Skip if button is clicked
 
-                    const isActive = card.classList.contains('active')
-                    document.querySelectorAll('.doctor-card').forEach(c => c.classList.remove('active'));
-                    document.querySelectorAll('.doctor-details').forEach(d => d.style.display = 'none');
-
-                    if(!isActive){
-                        card.classList.add('active');
-                        const detailsSection = document.getElementById(`details-${index}`);
-                        detailsSection.style.display = 'block';
-                    }
+                    card.classList.toggle('active');
                 });
 
                 doctorListContainer.appendChild(card);
@@ -309,12 +1436,240 @@
         }
 
         departmentFilter.addEventListener('change', () => {
-            displayDoctors(departmentFilter.value);
+            displayDoctors(
+                departmentFilter.value,
+                doctorSearch.value,
+                parseFloat(minRating.value),
+                parseInt(minExperience.value),
+                sortDoctors.value
+            );
         });
 
-        window.onload = () => {
-            displayDoctors('all');
+        doctorSearch.addEventListener('input', () => {
+            displayDoctors(
+                departmentFilter.value,
+                doctorSearch.value,
+                parseFloat(minRating.value),
+                parseInt(minExperience.value),
+                sortDoctors.value
+            );
+        });
+
+        minRating.addEventListener('input', () => {
+            minRatingValue.textContent = minRating.value;
+            displayDoctors(
+                departmentFilter.value,
+                doctorSearch.value,
+                parseFloat(minRating.value),
+                parseInt(minExperience.value),
+                sortDoctors.value
+            );
+        });
+
+        minExperience.addEventListener('change', () => {
+            displayDoctors(
+                departmentFilter.value,
+                doctorSearch.value,
+                parseFloat(minRating.value),
+                parseInt(minExperience.value),
+                sortDoctors.value
+            );
+        });
+
+        sortDoctors.addEventListener('change', () => {
+            displayDoctors(
+                departmentFilter.value,
+                doctorSearch.value,
+                parseFloat(minRating.value),
+                parseInt(minExperience.value),
+                sortDoctors.value
+            );
+        });
+
+        // Add this function to handle booking
+        function bookAppointment(index) {
+            localStorage.setItem('selectedDoctor', JSON.stringify(doctors[index]));
+            window.location.href = 'appointment.html';
+        }
+
+        // Hide details button handler
+        function hideDetails(event, index) {
+            event.stopPropagation();
+            const card = document.querySelector(`.doctor-card[data-index='${index}']`);
+            if (card) card.classList.remove('active');
+        }
+
+        // Add tooltips to filter controls
+        document.getElementById('minRating').setAttribute('title', 'Filter doctors by minimum rating');
+        document.getElementById('minExperience').setAttribute('title', 'Filter doctors by minimum years of experience');
+        document.getElementById('departmentFilter').setAttribute('title', 'Filter by department');
+        document.getElementById('doctorSearch').setAttribute('title', 'Search by name, hospital, or specialty');
+        document.getElementById('sortDoctors').setAttribute('title', 'Sort the doctor list');
+
+        // --- Doctor Comparison Logic ---
+        let compareDoctors = [];
+        function handleCompareToggle(doctor, checked, compareId) {
+            if (checked) {
+                if (compareDoctors.length < 2) {
+                    compareDoctors.push(doctor);
+                } else {
+                    // Only allow 2
+                    document.getElementById(compareId).checked = false;
+                    alert('You can only compare two doctors at a time.');
+                }
+            } else {
+                compareDoctors = compareDoctors.filter(d => d.name !== doctor.name);
+            }
+            showCompareModalIfReady();
+        }
+
+        function showCompareModalIfReady() {
+            // Remove any existing modal
+            const existing = document.getElementById('compareModalBg');
+            if (existing) existing.remove();
+            if (compareDoctors.length === 2) {
+                // Build modal
+                const modalBg = document.createElement('div');
+                modalBg.className = 'compare-modal-bg';
+                modalBg.id = 'compareModalBg';
+                modalBg.innerHTML = `
+                  <div class="compare-modal">
+                    <button class="compare-modal-close" onclick="document.getElementById('compareModalBg').remove(); clearCompareChecks();">&times;</button>
+                    <h2 style="text-align:center; color:#007bff; margin-bottom:1.2rem;">Doctor Comparison</h2>
+                    <table class="compare-table">
+                      <tr>
+                        <th></th>
+                        <th>${compareDoctors[0].name}</th>
+                        <th>${compareDoctors[1].name}</th>
+                      </tr>
+                      <tr>
+                        <td>Photo</td>
+                        <td><img src="${compareDoctors[0].image}" alt="${compareDoctors[0].name}" /></td>
+                        <td><img src="${compareDoctors[1].image}" alt="${compareDoctors[1].name}" /></td>
+                      </tr>
+                      <tr>
+                        <td>Degree</td>
+                        <td>${compareDoctors[0].degree}</td>
+                        <td>${compareDoctors[1].degree}</td>
+                      </tr>
+                      <tr>
+                        <td>Department</td>
+                        <td>${compareDoctors[0].department}</td>
+                        <td>${compareDoctors[1].department}</td>
+                      </tr>
+                      <tr>
+                        <td>Hospital</td>
+                        <td>${compareDoctors[0].hospital}</td>
+                        <td>${compareDoctors[1].hospital}</td>
+                      </tr>
+                      <tr>
+                        <td>Rating</td>
+                        <td>${compareDoctors[0].rating} ★</td>
+                        <td>${compareDoctors[1].rating} ★</td>
+                      </tr>
+                      <tr>
+                        <td>Experience</td>
+                        <td>${compareDoctors[0].experience} yrs</td>
+                        <td>${compareDoctors[1].experience} yrs</td>
+                      </tr>
+                      <tr>
+                        <td>Availability</td>
+                        <td>${compareDoctors[0].availability}</td>
+                        <td>${compareDoctors[1].availability}</td>
+                      </tr>
+                      <tr>
+                        <td>Clinic</td>
+                        <td>${compareDoctors[0].clinic}</td>
+                        <td>${compareDoctors[1].clinic}</td>
+                      </tr>
+                    </table>
+                  </div>
+                `;
+                document.body.appendChild(modalBg);
+            }
+        }
+        function clearCompareChecks() {
+            compareDoctors = [];
+            document.querySelectorAll('.compare-input').forEach(cb => cb.checked = false);
+        }
+
+        // --- Testimonials Carousel ---
+        const testimonials = [
+            { text: "This platform made it so easy to find the right doctor for my family. Highly recommended!", author: "— Priya S., Mumbai" },
+            { text: "I love the transparency and the verified doctors. I feel safe booking here.", author: "— Rahul G., Delhi" },
+            { text: "The comparison feature is a game changer! I could easily choose the best doctor for my needs.", author: "— Anjali T., Pune" },
+            { text: "Very professional and trustworthy. The ratings and reviews helped a lot.", author: "— Suresh V., Bangalore" },
+            { text: "Best health platform I've used. The support team is also very responsive.", author: "— Meena K., Hyderabad" }
+        ];
+        let testimonialIndex = 0;
+        function showTestimonial(idx) {
+            const t = testimonials[idx];
+            document.getElementById('testimonialText').textContent = t.text;
+            document.getElementById('testimonialAuthor').textContent = t.author;
+        }
+        document.getElementById('testimonialPrev').onclick = function() {
+            testimonialIndex = (testimonialIndex - 1 + testimonials.length) % testimonials.length;
+            showTestimonial(testimonialIndex);
         };
+        document.getElementById('testimonialNext').onclick = function() {
+            testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+            showTestimonial(testimonialIndex);
+        };
+        showTestimonial(testimonialIndex);
+
+        window.onload = () => {
+            minRatingValue.textContent = minRating.value;
+            displayDoctors('all', '', parseFloat(minRating.value), parseInt(minExperience.value), sortDoctors.value);
+        };
+
+        // Responsive navbar toggle
+        const navbarToggle = document.getElementById('navbarToggle');
+        const navbarLinks = document.getElementById('navbarLinks');
+        navbarToggle.onclick = function() {
+            navbarLinks.classList.toggle('open');
+        };
+
+        // --- Ask a Question Button & Modal ---
+        // Floating button
+        const askBtn = document.createElement('button');
+        askBtn.className = 'ask-btn';
+        askBtn.title = 'Ask a Question';
+        askBtn.innerHTML = '&#9993;';
+        askBtn.onclick = showAskModal;
+        document.body.appendChild(askBtn);
+
+        function showAskModal() {
+            // Remove any existing modal
+            const existing = document.getElementById('askModalBg');
+            if (existing) existing.remove();
+            // Build modal
+            const modalBg = document.createElement('div');
+            modalBg.className = 'ask-modal-bg';
+            modalBg.id = 'askModalBg';
+            modalBg.innerHTML = `
+              <form class="ask-modal" id="askForm">
+                <button type="button" class="ask-modal-close" onclick="document.getElementById('askModalBg').remove();">&times;</button>
+                <h2 style="text-align:center; color:#007bff; margin-bottom:1.2rem;">Ask a Question</h2>
+                <label for="askName">Your Name</label>
+                <input type="text" id="askName" name="askName" required />
+                <label for="askEmail">Your Email</label>
+                <input type="email" id="askEmail" name="askEmail" required />
+                <label for="askMsg">Your Question</label>
+                <textarea id="askMsg" name="askMsg" required></textarea>
+                <button type="submit">Send</button>
+                <div class="ask-confirm" id="askConfirm" style="display:none;">Thank you! Your question has been submitted.</div>
+              </form>
+            `;
+            document.body.appendChild(modalBg);
+            // Form handler
+            document.getElementById('askForm').onsubmit = function(e) {
+                e.preventDefault();
+                document.getElementById('askConfirm').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('askModalBg').remove();
+                }, 1800);
+            };
+        }
     </script>
 
 </body>
