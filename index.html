@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Powered Diagnosis</title>
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Upper Header -->
+  <div class="upper-Header">
+    <div class="logo">
+      <img src="Supporting Meterial/healthcare.png" alt="Logo">
+    </div>
+    <div class="user-Connect">
+      <button onclick="location.href='Sign_Up/Login.html'" class="btn1 btn-log">log In</button>
+      <button onclick="location.href='Sign_Up/Register.html'" class="btn1 btn-red-sn">Sign Up</button>
+    </div>
+  </div>
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <!-- <li class="symptom-dropdown">
+          <a href="#">Find My Disease <span class="arrow">&#9662;</span></a>
+          <ul class="symptom-menu">
+            <li><button onclick="openSymptomWindow()">Select Symptoms</button></li>
+          </ul>
+        </li> -->
+        <li class="doctor-dropdown">
+          <a href="#">Find Doctor <span class="arrow">&#9662;</span></a>
+          <ul class="doctor-menu">
+            <li><a href="Doctor_List/AlloDocList.html">Dr. For Allopathy</a></li>
+            <li><a href="Doctor_List/HomoDocList.html">Dr. For Homeopathy</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Treatments <span class="arrow">&#9662;</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="Allopathy-Page/index.html">Allopathy</a></li>
+            <li><a href="Homeopathy-page/index.html">Homeopathy</a></li>
+          </ul>
+        </li>
+        <li><a href="#doctors">AI Diagnosis</a></li>
+        <li><a href="#footer">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- <div class="floating-window" id="symptomWindow">
+      <h2>Select Your Symptoms</h2>
+      <div class="content">
+        <label><input type="checkbox" name="symptom" value="Fever"> Fever</label>
+        <label><input type="checkbox" name="symptom" value="Cough"> Cough</label>
+        <label><input type="checkbox" name="symptom" value="Headache"> Headache</label>
+        <label><input type="checkbox" name="symptom" value="Fatigue"> Fatigue</label>
+      </div>
+      <button class="analyze-btn" onclick="closeSymptomWindow()">Analyze</button>
+      <button class="close-btn" onclick="closeSymptomWindow()">Close</button>
+    </div> -->
+
+    <div class="floating-window" id="allopathyDr.">
+      <h2>Select Your Doctor</h2>
+      <div class="DRcontent">
+        <p>Dr. A Kumar - Cardiologist - 9876543210</p>
+        <p>Dr. C Verma - Neurologist - 8234567890</p>
+        <p>Dr. B Sharma - Dermatologist - 9123456789</p>
+      </div>
+      <button class="book-btn">Book Appointment</button>
+      <button class="close-btn" onclick="closeAllopathyDoctorWindow()">Close</button>
+    </div>
+  </header>
+  <div class="floating-window" id="homeopathyDr.">
+    <h2>Select Your Doctor</h2>
+    <div class="DRcontent">
+      <p>Dr. C Verma - Neurologist - 8234567890</p>
+      <p>Dr. A Kumar - Cardiologist - 9876543210</p>
+      <p>Dr. B Sharma - Dermatologist - 9123456789</p>
+    </div>
+    <button class="book-btn">Book Appointment</button>
+    <button class="close-btn" onclick="closeHomeopathyDoctorWindow()">Close</button>
+  </div>
+  </header>
+
+  <!-- Hero Section with Search Box and Options -->
+  <section class="hero">
+    <h2>AI-Powered Diagnosis for Better Health</h2>
+    <p>Get accurate insights for both Allopathy and Homeopathy solutions.</p>
+    <!-- Search Box for Symptoms -->
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Enter your symptoms..." />
+      <div id="suggestionBox" class="suggestions"></div>
+      <!-- <button>Search</button> -->
+    </div>
+    <!-- Options for Treatment Methods -->
+    <div class="options">
+      <a href="Allopathy-Page/index.html" class="option">Allopathy</a>
+      <a href="Homeopathy-page/index.html" class="option">Homeopathy</a>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="section" id="symptom">
+    <section class="text">
+      <div class="bg-text">Working</div>
+      <h2 class="sub-heading">How it works</h2>
+      <div class="main-heading">Working of our System</div>
+      <img src="../Supporting Meterial/line-1.png" alt="">
+    </section>
+    <div class="cards">
+      <div class="card" data-aos="fade-right" data-aos-delay="200">
+        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Search icon" />
+        <h3>Step 1: Search Symptoms</h3>
+        <p>Enter your symptoms and get personalized suggestions.</p>
+      </div>
+  
+      <div class="card" data-aos="fade-down" data-aos-delay="500">
+        <img src="https://cdn-icons-png.flaticon.com/512/565/565547.png" alt="Select doctor" />
+        <h3>Step 2: Select a Specialist</h3>
+        <p>We’ll guide you to the right mental health professional.</p>
+      </div>
+  
+      <div class="card" data-aos="fade-left" data-aos-delay="800">
+        <img src="https://cdn-icons-png.flaticon.com/512/3105/3105825.png" alt="Get support" />
+        <h3>Step 3: Get Support</h3>
+        <p>Connect and start your journey toward wellness.</p>
+      </div>
+      <!-- <div class="card">
+        <h4>Step 1</h4>
+        <p>Enter your symptoms in the search box above.</p>
+      </div>
+      <div class="card">
+        <h4>Step 2</h4>
+        <p>Receive AI-powered diagnosis for both treatment methods.</p>
+      </div>
+      <div class="card">
+        <h4>Step 3</h4>
+        <p>Consult with our experts for personalized care.</p>
+      </div> -->
+    </div>
+  </section>
+
+  <!-- Mental Health Section -->
+  <section class="section" id="mental">
+    <section class="text">
+      <div class="bg-text">Mental Health</div>
+      <h2 class="sub-heading">Mental Health Cards</h2>
+      <div class="main-heading">Know your Mental health</div>
+      <img src="../Supporting Meterial/line-1.png" alt="">
+    </section>
+    <div class="cards">
+      <div class="card" data-aos="fade-right" data-aos-delay="200">
+        <img src="https://static.thenounproject.com/png/chatbot-icon-2761520-512.png" alt="AI Chatbot Icon">
+        <h3>AI Chatbot</h3>
+        <p>Chat with our AI for mental health advice.</p>
+        <a href="#" class="btn btn-green">Chat Now</a>
+      </div>
+  
+      <div class="card" data-aos="fade-left" data-aos-delay="500">
+        <img src="https://static.thenounproject.com/png/self-assessment-icon-5592497-512.png" alt="Self Assessment Icon">
+        <h3>Self-Assessment</h3>
+        <p>Take a quick quiz to assess your mental health.</p>
+        <a href="#" class="btn btn-green">Start Quiz</a>
+      </div>
+      <!-- <div class="card">
+        <h4>AI Chatbot</h4>
+        <p>Chat with our AI for mental health advice.</p>
+        <a href="#" class="btn">Chat Now</a>
+      </div>
+      <div class="card">
+        <h4>Self-Assessment</h4>
+        <p>Take a quick quiz to assess your mental health.</p>
+        <a href="#" class="btn">Start Quiz</a>
+      </div> -->
+    </div>
+  </section>
+
+  <!-- Doctor Consultation Section -->
+  <section class="section" id="doctors">
+    <section class="text">
+      <div class="bg-text">Doctors</div>
+      <h2 class="sub-heading">Our Doctors</h2>
+      <div class="main-heading">Let's Cure Your Health with us</div>
+      <img src="../Supporting Meterial/line-1.png" alt="">
+    </section>
+    <div class="cards">
+      <div class="card" data-aos="fade-right" data-aos-delay="200">
+        <img src="https://cdn-icons-png.flaticon.com/512/3175/3175199.png" alt="Allopathy" />
+        <h3>Dr. Rahul Sharma</h3>
+        <p>Allopathy Specialist (MBBS, MD)</p>
+        <a href="#" class="btn btn-green">Book Appointment</a>
+        <a href="./Doctor_List/AlloDocList.html">
+          <button class="btn btn-indigo">View All Doctors</button>
+        </a>
+      </div>
+  
+      <div class="card" data-aos="fade-down" data-aos-delay="500">
+        <img src="https://cdn-icons-png.flaticon.com/512/3500/3500396.png" alt="Homeopathy" />
+        <h3>Dr. Ananya Singh</h3>
+        <p>Homeopathy Specialist (BHMS)</p>
+        <a href="#" class="btn btn-green">Book Appointment</a>
+        <a href="#">
+          <button class="btn btn-indigo">View All Doctors</button>
+        </a>
+      </div>
+
+      <div class="card" data-aos="fade-left" data-aos-delay="800">
+        <img src="https://cdn-icons-png.flaticon.com/512/4320/4320337.png" alt="ai doctor" />
+        <h3>AI Doctor</h3>
+        <p>Connect with our AI-powered virtual doctor for assistance</p>
+        <a href="#">
+          <button class="btn btn-green">AI Doctor</button>
+        </a>
+      </div>
+      <!-- <div class="card">
+        <h4>Dr. Rahul Sharma</h4>
+        <p>Allopathy Specialist (MBBS, MD)</p>
+        <a href="#" class="btn">Book Appointment</a>
+      </div>
+      <div class="card">
+        <h4>Dr. Ananya Singh</h4>
+        <p>Homeopathy Specialist (BHMS)</p>
+        <a href="#" class="btn">Book Appointment</a>
+      </div> -->
+    </div>
+  </section>
+
+  <!-- Chat Bot -->
+  <section>
+    <!-- Floating Button -->
+  <button class="chatbot-button" onclick="toggleChat()">💬</button>
+
+  <!-- Chat Window -->
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      AskBot AI
+      <span onclick="toggleChat()">✖</span>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <!-- messages will appear here -->
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type your question..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <!-- User Dashboard Section -->
+  <!-- <section class="section" id="dashboard">
+    <h3>User Dashboard</h3>
+    <p>Access your past reports, track symptoms, and set medication reminders.</p>
+    <a href="#" class="btn">Go to Dashboard</a>
+  </section> -->
+
+  <!-- Login Section for Personalized Tracker -->
+  <!-- <section class="login-section" id="login">
+    <h3>User Login</h3>
+    <form class="login-form">
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p style="text-align:center; margin-top:10px;">
+      Don't have an account? <a href="#" style="color:#00C896; text-decoration:none;">Register</a>
+    </p>
+  </section> -->
+
+  <!-- Footer -->
+  <footer id="footer">
+    <!-- <div class="bot">
+      <input type="checkbox" id="check"> <label class="chat-btn" for="check"> <i class="fa fa-commenting-o comment"></i>
+        <i class="fa fa-close close"></i> </label>
+      <div class="wrapper">
+        <iframe id="bot " allow="microphone;" width="350" height="430"
+          src="https://console.dialogflow.com/api-client/demo/embedded/a2a13de6-b506-4521-8512-1b3eaa5dc02f">
+        </iframe>
+      </div>
+    </div> -->
+    <div class="content-f">
+      <div class="left box-f">
+        <div class="upper">
+          <div class="topic">About us</div>
+          <p>MEDOMITRA is a thorough telemedicine website created to give consumers easy access to high-quality
+            healtcare services from the convenience of their homes.</p>
+        </div>
+        <div class="lower">
+          <div class="topic">Contact us</div>
+          <div class="phone">
+            <a href="#"><i class="fas fa-phone-volume"></i>+91 9748196100</a>
+          </div>
+          <div class="email">
+            <a href="#"><i class="fas fa-envelope"></i>vikramjeetgupta2004@gmail.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="middle box-f">
+        <div class="topic">Our Services</div>
+        <div><a href="./diet.html">DIET</a></div>
+        <div><a href="./aboutus.html">About Us</a></div>
+        <div><a href="#">Nearby Pharmas</a></div>
+        <div><a href="./map.html"> Nearby Hospitals</a></div>
+        <div><a href="./index.html#faq">FAQ's</a></div>
+      </div>
+      <div class="right box-f">
+        <div class="topic">Subscribe us</div>
+        <form action="#">
+          <input type="text" placeholder="Enter email address">
+          <input type="submit" name="" value="Send">
+          <div class="media-icons">
+            <a href="#" class="me-3"><img src="img/icons8-facebook.svg"></a>
+            <a href="#" class="me-3"><img src="img/icons8-twitter.svg"></a>
+            <a href="#" class="me-4"><img src="img/icons8-instagram.svg"></a>
+            <a href="#" class="me-4"><img src="img/icons8-github.svg"></a>
+            <a href="#" class="me-3"><img src="img/icons8-linkedin-circled.svg"></a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="bottom-f mt-4">
+      <p>Copyright © 2025 <a href="./index.html">MEDOMITRA</a> All rights reserved</p>
+    </div>
+  </footer>
+  <!-- AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <script src="script.js"></script>
+</body>
+
+</html>

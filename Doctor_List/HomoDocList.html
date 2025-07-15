@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homeopathy Doctor List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            padding-bottom: 60px;
+        }
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            font-size: 1.8rem;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+        }
+        .filter-container {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .filter-container select {
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+        .doctor-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            transition: all 0.3s ease-in-out;
+        }
+        .doctor-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, flex 0.3s ease, width 0.3s ease;
+            /* flex: 1 1 calc(33.333% - 1rem); */
+            min-width: 362px;
+        }
+        .doctor-card.active {
+            flex: 1 1 100%;
+            order: -1;
+        }
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+        .doctor-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            color: #28a745;
+        }
+        .doctor-card p {
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        .doctor-details {
+            display: none;
+            margin-top: 1rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+            animation: slideDown 0.3s ease forwards;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 500px; }
+        }
+        .book-button {
+            margin-top: 1rem;
+            padding: 0.6rem 1.5rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        .book-button:hover {
+            background-color: #0056b3;
+        }
+        .no-doctors {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #999;
+            margin-top: 2rem;
+        }
+        footer {
+            background-color: #28a745;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Homeopathy Doctors</h1>
+    <a href="../index.html">Home</a>
+</header>
+
+<div class="container">
+
+    <div class="filter-container">
+        <label for="departmentFilter"><strong>Filter by Department:</strong></label>
+        <select id="departmentFilter">
+            <option value="all">All</option>
+            <option value="Respiratory">Respiratory</option>
+            <option value="Skin">Skin</option>
+            <option value="Chronic">Chronic Diseases</option>
+            <option value="Digestive">Digestive Issues</option>
+        </select>
+    </div>
+
+    <div class="doctor-list" id="doctorList"></div>
+
+    <div class="no-doctors" id="noDoctors" style="display: none;">No doctors found in this department.</div>
+
+</div>
+
+<footer>
+    &copy; 2025 HelloTakeCare. All Rights Reserved.
+</footer>
+
+<script>
+    const doctors = [
+        { name: "Dr. Meena Bhatia", degree: "BHMS", department: "Respiratory", description: "Specialist in homeopathy treatments for asthma, bronchitis, and allergies.", clinic: "Breathe Easy Homeopathy, Delhi" },
+        { name: "Dr. Rajeev Khanna", degree: "BHMS, MD", department: "Skin", description: "Expert in treating skin diseases like eczema, psoriasis, and acne.", clinic: "Skin Harmony Clinic, Mumbai" },
+        { name: "Dr. Poonam Verma", degree: "BHMS", department: "Chronic", description: "Specialist in chronic disease management like arthritis and migraines.", clinic: "Healing Touch Homeopathy, Lucknow" },
+        { name: "Dr. Vikas Sinha", degree: "BHMS", department: "Digestive", description: "Focuses on digestive problems such as acidity, ulcers, and IBS.", clinic: "Gastro Homeopathy Centre, Pune" },
+        { name: "Dr. Anita Sharma", degree: "BHMS", department: "Skin", description: "Treats chronic skin allergies and pigmentation problems.", clinic: "Pure Skin Homeopathy, Jaipur" }
+    ];
+
+    const doctorListContainer = document.getElementById('doctorList');
+    const departmentFilter = document.getElementById('departmentFilter');
+    const noDoctors = document.getElementById('noDoctors');
+
+    function displayDoctors(department) {
+        doctorListContainer.innerHTML = '';
+        const filteredDoctors = department === 'all' ? doctors : doctors.filter(doc => doc.department === department);
+
+        if (filteredDoctors.length === 0) {
+            noDoctors.style.display = 'block';
+            return;
+        } else {
+            noDoctors.style.display = 'none';
+        }
+
+        filteredDoctors.forEach((doctor, index) => {
+            const card = document.createElement('div');
+            card.className = 'doctor-card';
+            card.setAttribute('data-index', index);
+
+            card.innerHTML = `
+                <h3>${doctor.name}</h3>
+                <p>${doctor.degree}</p>
+                <p><strong>Department:</strong> ${doctor.department}</p>
+                <div class="doctor-details" id="details-${index}">
+                    <p><strong>Description:</strong> ${doctor.description}</p>
+                    <p><strong>Clinic Address:</strong> ${doctor.clinic}</p>
+                    <button class="book-button" onclick="window.location.href='appointment.html'">Book Appointment</button>
+                </div>
+            `;
+
+            card.addEventListener('click', (e) => {
+                if (e.target.tagName.toLowerCase() === 'button') return; // Skip if button is clicked
+
+                document.querySelectorAll('.doctor-card').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.doctor-details').forEach(d => d.style.display = 'none');
+
+                card.classList.add('active');
+                const detailsSection = document.getElementById(`details-${index}`);
+                detailsSection.style.display = 'block';
+            });
+
+            doctorListContainer.appendChild(card);
+        });
+    }
+
+    departmentFilter.addEventListener('change', () => {
+        displayDoctors(departmentFilter.value);
+    });
+
+    window.onload = () => {
+        displayDoctors('all');
+    };
+</script>
+
+</body>
+</html>
