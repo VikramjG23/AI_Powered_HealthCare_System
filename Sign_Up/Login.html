@@ -891,10 +891,16 @@
           }
         });
         loginFormEl.addEventListener('submit', function(e) {
-          let valid = true;
-          if (!validateEmail(loginFormEl.email.value)) { setError('login-email-error', 'Enter a valid email.'); valid = false; }
-          if (loginFormEl.password.value.length < 8) { setError('login-password-error', 'Password must be at least 8 characters.'); valid = false; }
-          if (!valid) e.preventDefault();
+          e.preventDefault(); // Prevent default form submission
+          const email = loginFormEl.querySelector('input[name="email"]').value;
+          // Store in localStorage
+          localStorage.setItem('userEmail', email);
+          // For demo, set userName as 'User' if not already set
+          if (!localStorage.getItem('userName')) {
+            localStorage.setItem('userName', 'User');
+          }
+          // Redirect to dashboard
+          window.location.href = 'Dashbord.html';
         });
       }
       // Ripple effect for social buttons
